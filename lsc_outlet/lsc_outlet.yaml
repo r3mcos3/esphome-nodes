@@ -4,7 +4,7 @@ substitutions:
   friendly_name: LSC Outlet
 
 dashboard_import:
-  package_import_url:
+  package_import_url: github://r3mcos3/esphome-nodes/lsc_outlet/lsc_outlet.yaml
 
 esphome:
   name: ${name}
