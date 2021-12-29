@@ -1,0 +1,75 @@
+---
+substitutions:
+  name: lsc-outlet
+  friendly_name: LSC Outlet
+
+dashboard_import:
+  package_import_url:
+
+esphome:
+  name: ${name}
+  platform: esp8266
+  board: esp1_1m
+  name_add_mac_suffix: true
+  project:
+    name: r3mcos3.lsc-outlet
+    version: "1.0"
+
+wifi:
+  ssid: # Enter your WiFi SSID here. Example: `ssid: 'your_network_name'`
+  password: # Enter your wifi password here. Example: `password: 'abcde123456'`
+  ap:
+    ssid: "${friendly_name}_fallback_hotspot"
+    password: "${friendly_name}_1234"
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+captive_portal:
+
+web_server:
+  port: 80
+
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"
+  - platform: gpio
+    name: "${friendly_name} Button"
+    pin:
+      number: GPIO14
+      mode: INPUT_PULLUP
+      inverted: true
+    internal: true
+    on_press:
+      - switch.toggle: relay
+
+output:
+  - platform: esp8266_pwm
+    id: led
+    pin:
+      number: GPIO4
+      inverted: true
+
+light:
+  - platform: monochromatic
+    id: status_led
+    name: "${friendly_name} Light"
+    output: led
+
+switch:
+  - platform: gpio
+    id: relay
+    pin: GPIO12
+  - platform: template
+    name: "${friendly_name} Relay"
+    optimistic: true
+    id: relay_and_light
+    turn_on_action:
+      - switch.turn_on: relay
+      - light.turn_on: status_led
+    turn_off_action:
+      - switch.turn_off: relay
+      - light.turn_off: status_led
