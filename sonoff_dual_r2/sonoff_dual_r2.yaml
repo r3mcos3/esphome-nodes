@@ -14,7 +14,7 @@ esphome:
   board: esp1_1m
   name_add_mac_suffix: true
   project:
-    name: r3mcos3.pow_r2
+    name: r3mcos3.dual_r2
     version: "1.0"
 
 wifi:
