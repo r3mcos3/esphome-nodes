@@ -1,0 +1,68 @@
+---
+# sonoff dual r2 template
+# this template drives my roller shutter with autmatic stops on it
+substitutions:
+  name: dual_r2
+  friendly_name: Sonoff Dual R2
+
+dashboard_import:
+  package_import_url: github://r3mcos3/esphome-nodes/sonoff_dual_r2/sonoff_dual_r2.yaml@main
+
+esphome:
+  name: ${name}
+  platform: esp8266
+  board: esp1_1m
+  name_add_mac_suffix: true
+  project:
+    name: r3mcos3.pow_r2
+    version: "1.0"
+
+wifi:
+  ssid: # Enter your WiFi SSID here. Example: `ssid: 'your_network_name'`
+  password: # Enter your wifi password here. Example: `password: 'abcde123456'`
+  ap:
+    ssid: "${friendly_name}_fallback_hotspot"
+    password: "${friendly_name}_1234"
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+captive_portal:
+
+web_server:
+  port: 80
+
+button:
+  - platform: restart
+    name: "${friendly_name} Restart"
+
+switch:
+- platform: gpio
+  pin: GPIO12
+  interlock: &interlock [open_cover, close_cover]
+  id: open_cover
+- platform: gpio
+  pin: GPIO5
+  interlock: *interlock
+  id: close_cover
+- platform: gpio
+  pin: GPIO13
+  name: "${friendly_name} LED"
+  inverted: true
+
+cover:
+- platform: time_based
+  name: "${friendly_name}"
+  id: my_cover
+  open_action:
+    - switch.turn_on: open_cover
+  open_duration: 60s
+  close_action:
+    - switch.turn_on: close_cover
+  close_duration: 60s
+  stop_action:
+    - switch.turn_off: open_cover
+    - switch.turn_off: close_cover
