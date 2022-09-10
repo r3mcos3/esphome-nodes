@@ -70,4 +70,7 @@ switch:
     turn_off_action:
       - switch.turn_off: relay
       - light.turn_off: status_led
-    
+
+button:
+  - platform: restart
+    name: "${friendly_name} Restart"
