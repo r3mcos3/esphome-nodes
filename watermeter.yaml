@@ -146,7 +146,8 @@ sensor:
       id: sensor_pulse_meter_total
       name: "${friendly_name} Total Consumption"
       icon: "mdi:cube-outline"
-      unit_of_measurement: "M3"
+      device_class: "water"
+      unit_of_measurement: "m³"
       accuracy_decimals: 3
       filters:
         - multiply: 0.001
@@ -188,6 +189,15 @@ text_sensor:
     id: text_sensor_watermeterkit_model
     name: "${friendly_name} Model"
     update_interval: 5h
-    lambda: |-
+    lambda: |-gcom() {
+      git add .
+      git commit -m "$1"
+      }
+    lazyg() {
+      git add .
+      git commit -m "$1"
+      git push
+    }
+    
       return {"${watermeterkit_model}"};
     
