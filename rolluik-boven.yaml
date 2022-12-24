@@ -54,10 +54,10 @@ cover:
   id: my_cover
   open_action:
     - switch.turn_on: open_cover
-  open_duration: 60s
+  open_duration: 25s
   close_action:
     - switch.turn_on: close_cover
-  close_duration: 60s
+  close_duration: 21s
   stop_action:
     - switch.turn_off: open_cover
     - switch.turn_off: close_cover
