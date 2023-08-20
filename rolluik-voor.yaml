@@ -1,71 +1,14 @@
 substitutions:
   name: rolluik-voor
   friendly_name: Rolluik Voor
+packages: github://r3mcos3/esphome-nodes/rolluik.yaml@main
 
 esphome:
   name: ${name}
-
-esp8266:
-  board: esp01_1m
-
-# Enable logging
-logger:
-
-# Enable Home Assistant API
+  name_add_mac_suffix: false
+  friendly_name: ${friendly_name}
 api:
-
-ota:
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "Rolluik-Voor Fallback Hotspot"
-    password: !secret hotspot_password
-
-captive_portal:
-
-web_server:
-  port: 80
-
-binary_sensor:
-  - platform: gpio
-    pin: GPIO10
-    id: but_case
-    on_press:
-      then:
-        - cover.toggle: my_cover
-
-button:
-  - platform: restart
-    name: "${friendly_name} Restart"
-
-switch:
-- platform: gpio
-  pin: GPIO12
-  interlock: &interlock [open_cover, close_cover]
-  id: open_cover
-- platform: gpio
-  pin: GPIO5
-  interlock: *interlock
-  id: close_cover
-- platform: gpio
-  pin: GPIO13
-  name: "${friendly_name} LED"
-  inverted: true
-
-cover:
-- platform: time_based
-  name: "${friendly_name}"
-  id: my_cover
-  open_action:
-    - switch.turn_on: open_cover
-  open_duration: 37s
-  close_action:
-    - switch.turn_on: close_cover
-  close_duration: 33s
-  stop_action:
-    - switch.turn_off: open_cover
-    - switch.turn_off: close_cover
