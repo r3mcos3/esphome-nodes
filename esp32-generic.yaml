@@ -24,7 +24,7 @@ ota:
 improv_serial:
 
 dashboard_import:
-  package_import_url: github://r3mcos3/esphome-nodes/esp32-generic.yaml@main
+  package_import_url: github://esphome/bluetooth-proxies/esp32-generic.yaml@main
 
 esp32_ble_tracker:
   scan_parameters:
