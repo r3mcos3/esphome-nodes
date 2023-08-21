@@ -1,8 +1,8 @@
 substitutions:
-  name: esp32-bluetooth-proxy
+  name: esp32-bluetooth-proxy-ea2e38
   friendly_name: Bluetooth Proxy
 packages:
-  esphome.bluetooth-proxy: github://r3mcos3/esphome-nodes/esp32-generic.yaml@main
+  esphome.bluetooth-proxy: github://esphome/bluetooth-proxies/esp32-generic.yaml@main
 esphome:
   name: ${name}
   name_add_mac_suffix: false
