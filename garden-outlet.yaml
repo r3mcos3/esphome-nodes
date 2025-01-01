@@ -1,6 +1,6 @@
 substitutions:
-  name: schuur-outlet
-  friendly_name: Schuur Outlet
+  name: garden-outlet
+  friendly_name: Garden Outlet
 
 esphome:
   name: ${name}
@@ -23,7 +23,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Schuur-Outlet Fallback Hotspot"
+    ssid: "${friendly_name} Fallback Hotspot"
     password: !secret hotspot_password
 
 captive_portal:

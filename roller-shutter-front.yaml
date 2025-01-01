@@ -1,6 +1,6 @@
 substitutions:
-  name: rolluik-voor
-  friendly_name: Rolluik Voor
+  name: roller_shutter_front
+  friendly_name: Roller Shutter Front
 
 esphome:
   name: ${name}
@@ -23,7 +23,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Rolluik-Voor Fallback Hotspot"
+    ssid: "${friendly_name} Fallback Hotspot"
     password: !secret hotspot_password
 
 captive_portal:
