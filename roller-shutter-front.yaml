@@ -1,5 +1,5 @@
 substitutions:
-  name: roller_shutter_front
+  name: roller-shutter-front
   friendly_name: Roller Shutter Front
 
 esphome:
