@@ -1,5 +1,5 @@
 substitutions:
-  name: shed_outlet
+  name: shed-outlet
   friendly_name: Shed Outlet
 
 esphome:
