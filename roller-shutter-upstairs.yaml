@@ -1,5 +1,5 @@
 substitutions:
-  name: roller_shutter_upstairs
+  name: roller-shutter-upstairs
   friendly_name: Roller Shutter Upstairs
 
 esphome:
